@@ -1,0 +1,45 @@
+{
+	"name": "pr-dashboard",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"tay": "tay -i tokens.yaml -o src/tokens/tokens.css",
+		"lint": "eslint --ignore-path .gitignore .",
+		"precommit": "lint-staged",
+		"prebuild": "npm run tay",
+		"build": "parcel build ./src/index.html",
+		"prestart": "npm run tay",
+		"start": "parcel ./src/index.html --open -p 3000",
+		"server": "node server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@koa/cors": "^2.2.2",
+		"koa": "^2.5.2",
+		"koa-router": "^7.4.0",
+		"koa-static": "^5.0.0",
+		"node-fetch": "^2.2.0",
+		"parcel-bundler": "^1.9.7",
+		"react": "^16.4.2",
+		"react-dom": "^16.4.2",
+		"styled-components": "^3.4.5",
+		"yaab": "^1.0.1"
+	},
+	"devDependencies": {
+		"babel-plugin-transform-object-rest-spread": "^6.26.0",
+		"babel-plugin-transform-runtime": "^6.23.0",
+		"babel-polyfill": "^6.26.0",
+		"eslint": "^5.4.0",
+		"eslint-config-prettier": "^3.0.1",
+		"eslint-config-react": "^1.1.7",
+		"eslint-plugin-prettier": "^2.6.2",
+		"eslint-plugin-react": "^7.11.1",
+		"husky": "^0.14.3",
+		"lint-staged": "^7.2.2",
+		"prettier": "^1.14.2",
+		"tay": "^2.3.2"
+	}
+}

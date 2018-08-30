@@ -1,0 +1,5 @@
+font: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+color:
+  dark: "#283142"
+  lighter: "#323d4f"
+  text: "#ffffff"

@@ -1,0 +1,25 @@
+body,
+html {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--font);
+	background: var(--color-dark);
+	color: var(--color-text);
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: normal;
+}
+
+input {
+	font-family: var(--font);
+}
