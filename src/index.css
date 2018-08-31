@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro");
+
 body,
 html {
 	margin: 0;
@@ -6,6 +8,8 @@ html {
 	font-family: var(--font);
 	background: var(--color-dark);
 	color: var(--color-text);
+	overflow: hidden;
+	cursor: none;
 }
 
 *,
@@ -22,4 +26,8 @@ h3 {
 
 input {
 	font-family: var(--font);
+}
+
+code {
+	font-family: var(--code);
 }

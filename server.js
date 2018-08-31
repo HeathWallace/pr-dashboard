@@ -1,37 +1,54 @@
-/* eslint-env node */
 /* eslint-disable no-console */
-const Koa = require("koa");
-const Router = require("koa-router");
-const koaStatic = require("koa-static");
-const cors = require("@koa/cors");
+const express = require("express");
+const http = require("http");
+const socketIo = require("socket.io");
+const path = require("path");
 
 const loadPRs = require("./api/loadPRs");
+const servers = require("./servers");
 
-const app = new Koa();
-const router = new Router();
-
-/* global process */
 const port = process.env.PORT || 3001;
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+const ONE_MINUTE = 60000;
 
-const servers = [
-	{
-		url: "https://bitbucket.uhub.biz",
-		token: "",
-	},
-	{
-		url: "https://hsbc-bitbucket.heathwallace.com",
-		token: "",
-	},
-];
+app.use(express.static(path.join(__dirname, "dist")));
 
-router.get(
-	"/api/pull-requests",
-	async ctx => (ctx.body = await loadPRs(servers)),
-);
+const router = express.Router();
+router.get("/", (req, res) => res.sendStatus(200));
+app.use(router);
 
-app.use(cors());
-app.use(router.routes());
-app.use(router.allowedMethods());
-app.use(koaStatic("dist"));
-app.listen(port);
-console.log(`Listening on ${port}`);
+let PRs = [];
+let lastUpdated = 0;
+
+async function emitPRs({ force = false } = {}) {
+	if (io.engine.clientsCount === 0) {
+		console.log("No clients connected, skipping update");
+	}
+
+	if (force || io.engine.clientsCount > 0) {
+		force && console.log(`Force update, updating cache...`);
+		console.log(
+			`${io.engine.clientsCount} clients connected, updating cache...`,
+		);
+		io.emit("loading");
+		PRs = await loadPRs(servers);
+		lastUpdated = Date.now();
+		io.emit("prs", { PRs, lastUpdated });
+	}
+	console.log("Done");
+	setTimeout(emitPRs, ONE_MINUTE);
+}
+
+emitPRs({ force: true }).then(() => (lastUpdated = Date.now()));
+
+io.on("connection", socket => {
+	console.log(`New client connected (${io.engine.clientsCount})`);
+	socket.emit("prs", { PRs, lastUpdated });
+	socket.on("disconnect", () =>
+		console.log(`Client disconnected (${io.engine.clientsCount})`),
+	);
+});
+
+server.listen(port, () => console.log(`Listening on port ${port}`));
