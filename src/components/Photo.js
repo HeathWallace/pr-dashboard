@@ -45,12 +45,7 @@ const StyledPhoto = styled.img`
 
 const Photo = ({ name, photo, approval }) => (
 	<StyledContainer>
-		<StyledPhoto
-			src={photo}
-			alt={name}
-			approval={approval}
-			title={`${name} (${approval})`}
-		/>
+		<StyledPhoto src={photo} alt={name} approval={approval} />
 		{approval && (
 			<StyledApprovalIndicator approval={approval}>
 				{getApprovalText(approval)}

@@ -39,8 +39,6 @@ const translate = data =>
 				to: pr.toRef.displayId,
 			};
 
-			console.log(pr);
-
 			return item;
 		})
 		.sort((a, b) => b.updated - a.updated);
