@@ -35,6 +35,11 @@ const StyledTable = styled.table`
 	p {
 		margin: 0;
 	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 `;
 
 const StyledProjectName = styled.p`
@@ -77,7 +82,9 @@ const PullRequestList = ({ PRs }) => (
 				{PRs.map(pr => (
 					<tr key={pr.id}>
 						<td>
-							<h2>{pr.title}</h2>
+							<a href={pr.href} target="_blank" rel="noopener noreferrer">
+								<h2>{pr.title}</h2>
+							</a>
 							<StyledProjectName>
 								{pr.project} {pr.repo}
 							</StyledProjectName>
