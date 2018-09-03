@@ -26,10 +26,9 @@ const StyledTable = styled.table`
 
 	code {
 		background: rgba(255, 255, 255, 0.05);
-		padding: 0.5em;
+		padding: 0.66em;
 		border-radius: var(--curve-soft);
 		margin: 5px;
-		line-height: 3em;
 	}
 
 	h2,

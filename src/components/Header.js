@@ -6,8 +6,16 @@ export default styled.div`
 	width: 100%;
 	padding: 1em;
 	background: var(--color-dark);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 
 	h1 {
 		margin: 0;
+	}
+
+	span {
+		text-align: right;
 	}
 `;

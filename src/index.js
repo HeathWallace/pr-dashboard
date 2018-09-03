@@ -57,12 +57,20 @@ class App extends React.Component {
 		);
 	}
 
+	get lastUpdatedTime() {
+		const { lastUpdated } = this.state;
+		const d = new Date(lastUpdated);
+		return `${d.getHours()}:${d.getMinutes()}`;
+	}
+
 	render() {
 		const { PRs } = this.state;
+		const { lastUpdatedTime } = this;
 		return (
 			<React.Fragment>
 				<Header>
 					<h1>Pull requests ({PRs.length})</h1>
+					<span>Last updated: {lastUpdatedTime}</span>
 				</Header>
 				<PullRequestList PRs={translate(PRs)} />
 			</React.Fragment>

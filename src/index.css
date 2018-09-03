@@ -9,7 +9,6 @@ html {
 	background: var(--color-dark);
 	color: var(--color-text);
 	overflow: hidden;
-	cursor: none;
 }
 
 *,
