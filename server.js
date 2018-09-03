@@ -5,7 +5,13 @@ const socketIo = require("socket.io");
 const path = require("path");
 
 const loadPRs = require("./api/loadPRs");
-const servers = require("./servers");
+
+require("dotenv-safe").config();
+
+const servers = process.env.SERVERS.split("|").map(entry => {
+	const [url, Authorization] = entry.split(",");
+	return { url, headers: { Authorization } };
+});
 
 const port = process.env.PORT || 3001;
 const app = express();
