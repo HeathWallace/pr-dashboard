@@ -62,7 +62,9 @@ class App extends React.Component {
 	get lastUpdatedTime() {
 		const { lastUpdated } = this.state;
 		const d = new Date(lastUpdated);
-		return `${d.getHours()}:${d.getMinutes()}`;
+		const hours = `${d.getHours()}`.padStart(2, "0");
+		const minutes = `${d.getMinutes()}`.padStart(2, "0");
+		return `${hours}:${minutes}`;
 	}
 
 	render() {
