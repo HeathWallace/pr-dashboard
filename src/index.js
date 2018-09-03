@@ -7,8 +7,6 @@ import io from "socket.io-client";
 import Header from "./components/Header";
 import PullRequestList from "./components/PullRequestList";
 
-const endpoint = ":3001";
-
 const translate = data =>
 	data
 		.map(pr => {
@@ -52,7 +50,7 @@ class App extends React.Component {
 
 	componentDidMount() {
 		if (this.socket) return;
-		this.socket = io(endpoint);
+		this.socket = io();
 		this.socket.on("loading", () => this.setState({ loading: true }));
 		this.socket.on("prs", ({ PRs, lastUpdated }) =>
 			this.setState({ PRs, lastUpdated, loading: false }),
