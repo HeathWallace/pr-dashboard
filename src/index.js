@@ -23,14 +23,13 @@ const translate = data =>
 			item.title = pr.title;
 
 			item.reviewers = pr.reviewers
-				.slice()
-				.sort((a, b) => a.user.name.localeCompare(b.user.name))
 				.map(r => ({
 					name: r.user.displayName,
 					username: r.user.name,
 					photo: r.user.links.self[0].href + "/avatar.png",
 					approval: r.status,
-				}));
+				}))
+				.sort((a, b) => a.username.localeCompare(b.username));
 
 			item.branches = {
 				from: pr.fromRef.displayId,
