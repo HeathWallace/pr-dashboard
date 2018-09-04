@@ -1,0 +1,5 @@
+servers:
+- url: 'https://bitbucket-instance.example.com'
+  auth: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ='
+- url: 'https://another-bitbucket-instance.example.com'
+  auth: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ='

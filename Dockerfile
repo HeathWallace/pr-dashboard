@@ -7,8 +7,8 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install --quiet
 
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=3000
+EXPOSE 3000
 
 # Copy app source
 COPY . .

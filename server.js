@@ -3,15 +3,24 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const path = require("path");
+const yaml = require("js-yaml");
+const fs = require("fs");
 
 const loadPRs = require("./api/loadPRs");
 
-require("dotenv-safe").config();
+let servers = [];
 
-const servers = process.env.SERVERS.split("|").map(entry => {
-	const [url, Authorization] = entry.split(",");
-	return { url, headers: { Authorization } };
-});
+try {
+	const { servers: _servers } = yaml.safeLoad(
+		fs.readFileSync("config.yaml", "utf8"),
+	);
+	servers = _servers.map(({ url, auth }) => ({
+		url,
+		headers: { Authorization: auth },
+	}));
+} catch (e) {
+	console.error(e);
+}
 
 const port = process.env.PORT || 3001;
 const app = express();
