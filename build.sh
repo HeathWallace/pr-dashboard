@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-docker build -t dan1elhughes/pr-dashboard .
+username=$(docker info | sed '/Username:/!d;s/.* //')
+
+echo "Building $username/pr-dashboard"
+
+docker build -t $username/pr-dashboard .
