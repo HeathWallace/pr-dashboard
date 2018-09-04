@@ -78,7 +78,11 @@ class App extends React.Component {
 				</Header>
 				<PullRequestList PRs={translate(PRs)} />
 				<Footer>
-					<p>Please address feature requests to Dan Hughes</p>
+					<p>
+						<a href="https://github.com/dan1elhughes">
+							Please address feature requests to Dan Hughes
+						</a>
+					</p>
 				</Footer>
 			</React.Fragment>
 		);
