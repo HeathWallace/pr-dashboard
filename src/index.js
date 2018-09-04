@@ -5,6 +5,7 @@ import bindMethods from "yaab";
 import io from "socket.io-client";
 
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import PullRequestList from "./components/PullRequestList";
 
 const translate = data =>
@@ -76,6 +77,9 @@ class App extends React.Component {
 					<span>Last updated: {lastUpdatedTime}</span>
 				</Header>
 				<PullRequestList PRs={translate(PRs)} />
+				<Footer>
+					<p>Please address feature requests to Dan Hughes</p>
+				</Footer>
 			</React.Fragment>
 		);
 	}
