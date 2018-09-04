@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 # Install application dependencies
 COPY package.json package-lock.json ./
-RUN npm install --quiet
+RUN npm install --silent
 
 ENV PORT=3000
 EXPOSE 3000
