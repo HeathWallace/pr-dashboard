@@ -48,9 +48,14 @@ async function emitPRs({ force = false } = {}) {
 			`${io.engine.clientsCount} clients connected, updating cache...`,
 		);
 		io.emit("loading");
-		PRs = await loadPRs(servers);
-		lastUpdated = Date.now();
-		io.emit("prs", { PRs, lastUpdated });
+		try {
+			PRs = await loadPRs(servers);
+			lastUpdated = Date.now();
+			io.emit("prs", { PRs, lastUpdated });
+		} catch (e) {
+			console.log("Failed to fetch PRs:");
+			console.log(e);
+		}
 	}
 	console.log("Done");
 	setTimeout(emitPRs, ONE_MINUTE);
