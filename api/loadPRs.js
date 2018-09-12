@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 const depaginate = require("./depaginate");
+const fetch = require("node-fetch");
 
 const flatten = arrs => [].concat.apply([], arrs);
 
@@ -12,6 +13,18 @@ const loadPRs = async ({ url, headers, project, repo }) => {
 	return PRs;
 };
 
+const createBuildStatus = ({ url, headers }) => async PRs =>
+	Promise.all(
+		PRs.map(async PR => {
+			console.log(`Loading build status for ${PR.id}`);
+			const { latestCommit } = PR.fromRef;
+			const endpoint = `${url}/rest/build-status/latest/commits/stats/${latestCommit}`;
+			const buildStatus = await fetch(endpoint, { headers });
+			const build = await buildStatus.json();
+			return { ...PR, build };
+		}),
+	);
+
 module.exports = async servers =>
 	flatten(
 		await Promise.all(
@@ -19,6 +32,7 @@ module.exports = async servers =>
 				console.log(`Loading repos at ${url}...`);
 
 				const endpoint = `${url}/rest/api/latest/repos`;
+				const addBuildStatus = createBuildStatus({ url, headers });
 
 				const repos = (await depaginate(endpoint, { headers })).filter(
 					r => r.project.type === "NORMAL",
@@ -38,9 +52,11 @@ module.exports = async servers =>
 					),
 				);
 
+				const withBuilds = await addBuildStatus(PRs);
+
 				console.log(`${url} done, got ${PRs.length} PRs`);
 
-				return PRs;
+				return withBuilds;
 			}),
 		),
 	);
