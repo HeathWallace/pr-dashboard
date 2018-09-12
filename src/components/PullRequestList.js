@@ -66,6 +66,34 @@ const StyledDirectionIndicator = styled.span`
 	font-weight: bold;
 `;
 
+const getColourFromStatus = ({ status }) => {
+	switch (status) {
+		case "successful":
+			return "#36B37E";
+		case "failed":
+			return "red";
+		case "inProgress":
+			return "#FFAB00";
+	}
+};
+
+const getEmojiFromStatus = status => {
+	switch (status) {
+		case "successful":
+			return "✔️";
+		case "failed":
+			return "❗";
+		case "inProgress":
+			return "⏳";
+	}
+};
+
+const StyledBuildIndicator = styled.span`
+	padding: 0.33em;
+	border-radius: var(--curve-soft);
+	background: ${getColourFromStatus};
+`;
+
 const PullRequestList = ({ PRs }) => (
 	<React.Fragment>
 		<StyledTable>
@@ -75,6 +103,7 @@ const PullRequestList = ({ PRs }) => (
 					<th>Author</th>
 					<th>Reviewers</th>
 					<th>Branches</th>
+					<th>Build</th>
 					<th>Updated</th>
 				</tr>
 			</thead>
@@ -104,6 +133,16 @@ const PullRequestList = ({ PRs }) => (
 							<code>{pr.branches.from}</code>
 							<StyledDirectionIndicator>→</StyledDirectionIndicator>
 							<code>{pr.branches.to}</code>
+						</td>
+						<td>
+							{Object.entries(pr.builds)
+								.map(([value, count]) => Array(count).fill(value))
+								.reduce((a, b) => a.concat(b), [])
+								.map((status, i) => (
+									<StyledBuildIndicator key={i} status={status}>
+										{getEmojiFromStatus(status)}
+									</StyledBuildIndicator>
+								))}
 						</td>
 						<td>{timeago().format(pr.updated)}</td>
 					</tr>

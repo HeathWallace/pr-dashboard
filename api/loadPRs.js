@@ -20,8 +20,8 @@ const createBuildStatus = ({ url, headers }) => async PRs =>
 			const { latestCommit } = PR.fromRef;
 			const endpoint = `${url}/rest/build-status/latest/commits/stats/${latestCommit}`;
 			const buildStatus = await fetch(endpoint, { headers });
-			const build = await buildStatus.json();
-			return { ...PR, build };
+			const builds = await buildStatus.json();
+			return { ...PR, builds };
 		}),
 	);
 

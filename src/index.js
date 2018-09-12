@@ -39,6 +39,8 @@ const translate = data =>
 
 			item.href = pr.links.self[0].href;
 
+			item.builds = pr.builds;
+
 			return item;
 		})
 		.sort((a, b) => b.updated - a.updated);
