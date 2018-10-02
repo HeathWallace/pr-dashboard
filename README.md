@@ -15,6 +15,12 @@ $ vim config.yaml
 $ docker run -d -P -v $(pwd)/config.yaml:/usr/src/app/config.yaml dan1elhughes/pr-dashboard
 ```
 
+## Semi-permanent usage (i.e. on a dedicated machine)
+
+```shell
+$ docker run -d -p 30000:3000 -v $(pwd)/config.yaml:/usr/src/app/config.yaml --name pr-dashboard --restart always pr-dashboard
+```
+
 ## Local development
 
 ```shell
