@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import timeago from "timeago.js";
 
 import Photo from "./Photo";
+import DayCount from "./DayCount";
 
 const StyledTable = styled.table`
 	width: 100%;
@@ -53,13 +54,6 @@ const StyledAuthorContainer = styled.div`
 	span {
 		padding-left: 1em;
 	}
-`;
-
-const StyledEmptyMessage = styled.p`
-	text-align: center;
-	padding-top: 30vh;
-	color: rgba(255, 255, 255, 0.3);
-	width: 100%;
 `;
 
 const StyledDirectionIndicator = styled.span`
@@ -149,9 +143,7 @@ const PullRequestList = ({ PRs }) => (
 				))}
 			</tbody>
 		</StyledTable>
-		{PRs.length === 0 && (
-			<StyledEmptyMessage>No pull requests awaiting review.</StyledEmptyMessage>
-		)}
+		{PRs.length === 0 && <DayCount />}
 	</React.Fragment>
 );
 
