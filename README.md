@@ -54,7 +54,7 @@ $ npm run lint
 
 ## Authors
 
-Maintained by [@dan1elhughes](https://github.com/dan1elhughes).
+Maintained by [@peasandwell](https://github.com/peasandwell).
 
 See also the list of [contributors](https://github.com/heathwallace/pr-dashboard/contributors) who participated in this project.
 
