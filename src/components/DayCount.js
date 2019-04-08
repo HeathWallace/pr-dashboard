@@ -8,7 +8,7 @@ const StyledParagraph = styled.p`
 	width: 100%;
 `;
 
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function (days) {
 	const date = new Date(this.valueOf());
 	date.setDate(date.getDate() + days);
 	return date;
@@ -17,6 +17,7 @@ Date.prototype.addDays = function(days) {
 const getNumWorkDays = (startDate, endDate) => {
 	let numWorkDays = 0;
 	let currentDate = new Date(startDate);
+	const mirumDaysOff = 6; // Strips out non-weekend days off.
 	while (currentDate <= endDate) {
 		// Skips Sunday and Saturday
 		if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
@@ -24,7 +25,7 @@ const getNumWorkDays = (startDate, endDate) => {
 		}
 		currentDate = currentDate.addDays(1);
 	}
-	return numWorkDays;
+	return numWorkDays - mirumDaysOff;
 };
 
 const DayCount = () => (
