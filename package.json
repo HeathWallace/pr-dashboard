@@ -10,7 +10,7 @@
 		"prebuild": "npm run tay",
 		"build": "parcel build ./src/index.html",
 		"prestart": "npm run tay",
-		"start": "parcel ./src/index.html --open -p 3000",
+		"start": "parcel ./src/index.html --open -p 3020",
 		"server": "node server.js"
 	},
 	"keywords": [],
