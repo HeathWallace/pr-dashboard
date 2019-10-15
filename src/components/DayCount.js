@@ -18,6 +18,7 @@ const getNumWorkDays = (startDate, endDate) => {
 	let numWorkDays = 0;
 	let currentDate = new Date(startDate);
 	const mirumDaysOff = 10; // Strips out non-weekend days off.
+
 	while (currentDate <= endDate) {
 		// Skips Sunday and Saturday
 		if (currentDate.getDay() !== 0 && currentDate.getDay() !== 6) {
