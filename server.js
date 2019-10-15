@@ -22,7 +22,7 @@ try {
 	console.error(e);
 }
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3021;
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
